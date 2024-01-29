@@ -1,3 +1,5 @@
 {
-  "cSpell.words": ["clsx"]
+  "cSpell.words": ["clsx"],
+  "i18n-ally.localesPaths": ["messages"],
+  "i18n-ally.keystyle": "nested"
 }
