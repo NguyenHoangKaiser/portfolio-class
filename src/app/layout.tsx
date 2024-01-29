@@ -2,6 +2,8 @@ import "~/styles/globals.css";
 import { Inter } from "next/font/google";
 import { TRPCReactProvider } from "~/trpc/react";
 import { cn } from "~/lib/utils";
+import { ThemeProvider } from "~/components/theme-provider";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -20,14 +22,27 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html suppressHydrationWarning lang="en">
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
+          "relative min-h-screen font-sans antialiased",
           inter.variable,
         )}
       >
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+        <TRPCReactProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <AntdRegistry>
+              <main className="relative flex min-h-screen flex-col">
+                <div className="flex-1 flex-grow">{children}</div>
+              </main>
+            </AntdRegistry>
+          </ThemeProvider>
+        </TRPCReactProvider>
       </body>
     </html>
   );
