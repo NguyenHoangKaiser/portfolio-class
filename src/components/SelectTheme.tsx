@@ -1,19 +1,29 @@
 "use client";
 
+import { Button } from "antd";
+import { useLocale } from "next-intl";
 import { useTheme } from "next-themes";
+import withTheme from "./withTheme";
 
-export function SelectTheme() {
+const SelectThemeComp = () => {
   const { setTheme, theme } = useTheme();
+  const locale = useLocale();
 
   return (
     <div>
-      <button
+      <Button
         onClick={() => {
           theme === "dark" ? setTheme("light") : setTheme("dark");
         }}
       >
-        Theme
-      </button>
+        {locale === "en" ? "Theme" : "Chủ đề"}
+      </Button>
     </div>
   );
-}
+};
+
+const SelectTheme = () => {
+  return withTheme(<SelectThemeComp />);
+};
+
+export default SelectTheme;
