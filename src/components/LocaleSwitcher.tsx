@@ -1,40 +1,21 @@
-"use client";
+import { useLocale, useTranslations } from "next-intl";
+import { locales } from "../config";
+import LocaleSwitcherSelect from "./LocaleSwitcherSelect";
+import icEn from "../../public/svg/icEn.svg";
+import icVn from "../../public/svg/icVn.svg";
+import { type StaticImport } from "next/dist/shared/lib/get-img-props";
 
-import { usePathname, useRouter } from "~/navigation";
-import { useCallback, useTransition } from "react";
-import { Select } from "antd";
-import { locales } from "~/config";
-import { useLocale } from "next-intl";
-
-const localeOptions = locales.map((locale) => ({
-  label: locale,
-  value: locale,
-}));
-
-const LocaleSwitcher = () => {
-  const router = useRouter();
-  const [isPending, startTransition] = useTransition();
-  const pathname = usePathname();
+export default function LocaleSwitcher() {
+  const t = useTranslations("LocaleSwitcher");
   const locale = useLocale();
 
-  const handleOnChange = useCallback(
-    (value: string) => {
-      startTransition(() => {
-        router.push(pathname, { locale: value });
-      });
-    },
-    [pathname, router, startTransition],
-  );
+  const localeOptions = locales.map((locale) => ({
+    label: t("locale", { locale }),
+    value: locale,
+    icon: locale === "vi" ? (icVn as StaticImport) : (icEn as StaticImport),
+  }));
 
   return (
-    <Select
-      defaultValue={locale}
-      loading={isPending}
-      disabled={isPending}
-      onChange={handleOnChange}
-      options={localeOptions}
-    />
+    <LocaleSwitcherSelect localeOptions={localeOptions} defaultValue={locale} />
   );
-};
-
-export default LocaleSwitcher;
+}

@@ -45,6 +45,13 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   },
+  pages: {
+    signIn: "/auth/signin",
+    // signOut: "/auth/sign-out",
+    error: "/auth/signin", // Error code passed in query string as ?error=
+    // verifyRequest: "/auth/verify-request",
+    // newUser: "/auth/new-user",
+  },
   adapter: PrismaAdapter(db),
   providers: [
     GithubProvider({

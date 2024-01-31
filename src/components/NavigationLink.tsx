@@ -1,6 +1,5 @@
 "use client";
 
-import clsx from "clsx";
 import { useSelectedLayoutSegment } from "next/navigation";
 import { type ComponentProps } from "react";
 import type { AppPathnames } from "../config";
@@ -17,11 +16,8 @@ export default function NavigationLink<Pathname extends AppPathnames>({
   return (
     <Link
       aria-current={isActive ? "page" : undefined}
-      className={clsx(
-        "transition-colors",
-        isActive ? "text-white" : "text-gray-400 hover:text-gray-200",
-      )}
       href={href}
+      style={{ fontWeight: isActive ? "bold" : "normal" }}
       {...rest}
     />
   );

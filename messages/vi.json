@@ -19,8 +19,8 @@
     "title": "next-intl example"
   },
   "LocaleSwitcher": {
-    "label": "Change language",
-    "locale": "{locale, select, de {🇩🇪 Deutsch} en {🇺🇸 English} other {Unknown}}"
+    "label": "Đổi ngôn ngữ",
+    "locale": "{locale, select, vi {Tiếng Việt} en {Tiếng Anh} other {Unknown}}"
   },
   "Navigation": {
     "home": "Home",

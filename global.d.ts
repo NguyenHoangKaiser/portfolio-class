@@ -1,4 +1,5 @@
+/* eslint-disable @typescript-eslint/no-empty-interface */
 /* eslint-disable @typescript-eslint/consistent-type-imports */
 // Use type safe message keys with `next-intl`
 type Messages = typeof import("./messages/en.json");
-type IntlMessages = Messages;
+declare interface IntlMessages extends Messages {}
