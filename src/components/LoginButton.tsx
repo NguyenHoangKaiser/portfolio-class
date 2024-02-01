@@ -1,6 +1,6 @@
 "use client";
 
-import { signIn, type ClientSafeProvider } from "next-auth/react";
+import { signIn, signOut, type ClientSafeProvider } from "next-auth/react";
 import { Button } from "./ui/button";
 import { GitHubLogoIcon, DiscordLogoIcon } from "@radix-ui/react-icons";
 
@@ -35,7 +35,11 @@ const LoginButton = ({ provider }: { provider: ClientSafeProvider }) => {
   return (
     <Button
       className="flex items-center justify-center gap-x-2 rounded-md border border-slate-600 bg-slate-700 px-4 py-3 text-slate-300 transition hover:text-blue-400"
-      onClick={() => signIn(provider.id)}
+      onClick={() =>
+        signIn(provider.id, {
+          callbackUrl: "/",
+        })
+      }
     >
       {getIcon(provider.name)}
       <span>Sign in with {provider.name}</span>
@@ -43,4 +47,20 @@ const LoginButton = ({ provider }: { provider: ClientSafeProvider }) => {
   );
 };
 
+const LogoutButton = () => {
+  return (
+    <Button
+      className="flex items-center justify-center gap-x-2 rounded-md border border-slate-600 bg-slate-700 px-4 py-3 text-slate-300 transition hover:text-blue-400"
+      onClick={() =>
+        signOut({
+          callbackUrl: "/",
+        })
+      }
+    >
+      <span>Sign out</span>
+    </Button>
+  );
+};
+
+export { LogoutButton };
 export default LoginButton;

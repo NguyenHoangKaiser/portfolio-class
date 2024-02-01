@@ -1,6 +1,7 @@
 import { getProviders } from "next-auth/react";
 import { getServerAuthSession } from "~/server/auth";
 import LoginButton from "~/components/LoginButton";
+import { redirect } from "~/navigation";
 
 const errors = {
   Signin: "Try signing with a different account.",
@@ -34,7 +35,7 @@ export default async function SignIn({
   // Note: Make sure not to redirect to the same page
   // To avoid an infinite loop!
   if (session) {
-    return { redirect: { destination: "/" } };
+    return redirect("/");
   }
 
   const providers = (await getProviders()) ?? [];

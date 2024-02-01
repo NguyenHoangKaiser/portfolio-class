@@ -1,7 +1,3 @@
-export default function ClassPage() {
-  return (
-    <div>
-      <h1>Class Page</h1>
-    </div>
-  );
+export default function Page() {
+  return <h1 className="text-black">Hello, Dashboard Page!</h1>;
 }

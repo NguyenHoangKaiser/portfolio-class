@@ -6,7 +6,11 @@ import { ThemeProvider } from "~/components/theme-provider";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import { locales } from "~/config";
-import { useTranslations } from "next-intl";
+import {
+  useTranslations,
+  NextIntlClientProvider,
+  useMessages,
+} from "next-intl";
 import { type StaticImport } from "next/dist/shared/lib/get-img-props";
 import icEn from "../../../public/svg/icEn.svg";
 import icVn from "../../../public/svg/icVn.svg";
@@ -48,6 +52,7 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
   // Enable static rendering
   unstable_setRequestLocale(locale);
   const t = useTranslations("LocaleSwitcher");
+  const messages = useMessages();
 
   const localeOptions: TLocaleOptions = locales.map((locale) => ({
     label: t("locale", { locale }),
@@ -72,9 +77,11 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
               disableTransitionOnChange
             >
               <AntdConfigProvider localeOptions={localeOptions}>
-                <main className="relative flex min-h-screen flex-col">
-                  <div className="flex-1 flex-grow">{children}</div>
-                </main>
+                <NextIntlClientProvider locale={locale} messages={messages}>
+                  <main className="relative flex min-h-screen flex-col">
+                    <div className="flex-1 flex-grow">{children}</div>
+                  </main>
+                </NextIntlClientProvider>
               </AntdConfigProvider>
             </ThemeProvider>
           </AntdRegistry>

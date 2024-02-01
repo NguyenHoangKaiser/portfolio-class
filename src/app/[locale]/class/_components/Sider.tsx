@@ -91,19 +91,7 @@ const CustomSider = ({ title, fixed }: { title?: string; fixed?: boolean }) => {
             fontSize: "14px",
           }}
         >
-          <Link href="/">
-            <a
-              style={{
-                color: token.colorPrimary,
-                fontWeight: 600,
-                fontSize: "20px",
-                lineHeight: "24px",
-                letterSpacing: "0.15px",
-              }}
-            >
-              {title}
-            </a>
-          </Link>
+          <Link href="/"></Link>
         </div>
         {/* <Menu
           selectedKeys={selectedKey ? [selectedKey] : []}

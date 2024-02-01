@@ -18,11 +18,17 @@ const authMiddleware = withAuth(
   {
     //! Maybe we don't need this?
     callbacks: {
-      authorized: ({ token }) => token != null,
+      authorized({ req }) {
+        return req.cookies.get("next-auth.session-token") !== undefined;
+      },
     },
-    // pages: {
-    //   signIn: "/auth/signin",
-    // },
+    pages: {
+      signIn: "/auth/signin",
+      signOut: "/auth/signout",
+      error: "/auth/signin", // Error code passed in query string as ?error=
+      // verifyRequest: "/auth/verify-request",
+      // newUser: "/auth/new-user",
+    },
   },
 );
 

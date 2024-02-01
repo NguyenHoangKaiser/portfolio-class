@@ -5,12 +5,9 @@ export const locales = ["en", "vi"] as const;
 export const publicPages = [
   "/",
   "/auth/signin",
-  "/api/auth/signout",
-  "/api/auth/signin",
-  "/api/auth/callback",
-  "/api/auth/csrf",
-  "/api/auth/session",
-  "/api/auth/providers",
+  "/auth/signout",
+  // "/class",
+
   // Any other page not included here would require authentication.
 ];
 
@@ -21,12 +18,8 @@ export const pathnames = {
   // single external path can be provided.
   "/": "/",
   "/auth/signin": "/auth/signin",
-  "/api/auth/signout": "/api/auth/signout",
-  "/api/auth/signin": "/api/auth/signin",
-  "/api/auth/callback": "/api/auth/callback",
-  "/api/auth/csrf": "/api/auth/csrf",
-  "/api/auth/session": "/api/auth/session",
-  "/api/auth/providers": "/api/auth/providers",
+  "/auth/signout": "/auth/signout",
+  "/class": "/class",
 
   // If locales use different paths, you can
   // specify each external path per locale.

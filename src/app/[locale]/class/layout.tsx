@@ -1,15 +1,16 @@
-import { Layout, Grid } from "antd";
+import { Layout } from "antd";
 import CustomHeader from "./_components/Header";
 import CustomSider from "./_components/Sider";
-const { Content } = Layout;
+import { getServerAuthSession } from "~/server/auth";
+import { Content } from "antd/lib/layout/layout";
 
-export function ClassLayout({
+export default async function ClassLayout({
   children, // will be a page or nested layout
 }: {
   children: React.ReactNode;
 }) {
-  const breakpoint = Grid.useBreakpoint();
-  const isSmall = typeof breakpoint.sm === "undefined" ? true : breakpoint.sm;
+  const session = await getServerAuthSession();
+
   return (
     <Layout
       style={{
@@ -19,12 +20,12 @@ export function ClassLayout({
     >
       <CustomSider fixed={true} title="Bruh" />
       <Layout>
-        <CustomHeader />
+        <CustomHeader session={session!} />
         <Content>
           <div
             style={{
               minHeight: 360,
-              padding: isSmall ? 24 : 12,
+              padding: 12,
             }}
           >
             {children}
