@@ -1,15 +1,15 @@
 import { Layout } from "antd";
 import CustomHeader from "./_components/Header";
 import CustomSider from "./_components/Sider";
-import { getServerAuthSession } from "~/server/auth";
 import { Content } from "antd/lib/layout/layout";
+import { checkServerSession } from "~/server/auth";
 
 export default async function ClassLayout({
   children, // will be a page or nested layout
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerAuthSession();
+  const session = await checkServerSession();
 
   return (
     <Layout
@@ -18,9 +18,9 @@ export default async function ClassLayout({
       }}
       hasSider={true}
     >
-      <CustomSider fixed={true} title="Bruh" />
+      <CustomSider fixed={true} session={session} />
       <Layout>
-        <CustomHeader session={session!} />
+        <CustomHeader session={session} />
         <Content>
           <div
             style={{

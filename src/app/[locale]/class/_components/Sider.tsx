@@ -10,15 +10,23 @@ import {
   LeftOutlined,
   RightOutlined,
 } from "@ant-design/icons";
-import { Link } from "~/navigation";
+import { Link, useRouter } from "~/navigation";
+import { Session } from "next-auth";
 
 const { SubMenu } = Menu;
 const { useToken } = theme;
 
-const CustomSider = ({ title, fixed }: { title?: string; fixed?: boolean }) => {
+const CustomSider = ({
+  session,
+  fixed,
+}: {
+  session: Session;
+  fixed?: boolean;
+}) => {
   const [siderCollapsed, setSiderCollapsed] = React.useState(false);
-  const [mobileSiderOpen, setMobileSiderOpen] = React.useState(false);
   const { token } = useToken();
+  const router = useRouter();
+  const { user } = session;
 
   const siderStyles: React.CSSProperties = {
     backgroundColor: token.colorBgContainer,

@@ -7,6 +7,7 @@ import {
 import GithubProvider from "next-auth/providers/github";
 
 import { env } from "~/env";
+import { redirect } from "~/navigation";
 import { db } from "~/server/db";
 
 /**
@@ -69,3 +70,15 @@ export const authOptions: NextAuthOptions = {
  * @see https://next-auth.js.org/configuration/nextjs
  */
 export const getServerAuthSession = () => getServerSession(authOptions);
+
+/**
+ * Check if the user is authenticated. If not, redirect to the login page.
+ * @returns The user's session.
+ */
+export const checkServerSession = async () => {
+  const session = await getServerAuthSession();
+  if (!session) {
+    redirect("/auth/signin");
+  }
+  return session!;
+};
